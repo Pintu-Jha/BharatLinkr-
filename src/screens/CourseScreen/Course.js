@@ -1,193 +1,28 @@
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {textScale} from '../../styles/responsiveStyles';
-import WapperContainer from '../../Components/WapperContainer';
-import TextComp from '../../Components/TextComp';
-import SerachBar from '../../Components/SerachBar';
+import WapperContainer from '../../Components/common/WapperContainer';
+import SerachBar from '../../Components/common/SerachBar';
 import {spacing} from '../../styles/spacing';
 import {fontNames} from '../../styles/typography';
-import ImagePath from '../../Utills/ImagePath';
-import BottonComp from '../../Components/BottonComp';
 import commonStyle from '../../styles/commonStyle';
-
-const dummyData = [
-  {
-    heading: 'Bachetor of Science',
-    descrioption: '[B.sc] (Microbology)',
-    accepting_College: '3 Yrs',
-    Application_date: 'Full Time',
-    Exam_data: '12 Colleges Offering This Course',
-    result_data: 'Average Fees',
-    Average_salary: 'Average Salary',
-    price: '₹ 30,000',
-    id: 1,
-    color: '#1BA643',
-  },
-  {
-    heading: 'Bachetor of Science',
-    descrioption: '[B.sc] (Microbology)',
-    accepting_College: '3 Yrs',
-    Application_date: 'Full Time',
-    Exam_data: '12 Colleges Offering This Course',
-    result_data: 'Average Fees',
-    Average_salary: 'Average Salary',
-    price: '₹ 30,000',
-    id: 2,
-    color: '#F7684A',
-  },
-  {
-    heading: 'Bachetor of Science',
-    descrioption: '[B.sc] (Microbology)',
-    accepting_College: '3 Yrs',
-    Application_date: 'Full Time',
-    Exam_data: '12 Colleges Offering This Course',
-    result_data: 'Average Fees',
-    Average_salary: 'Average Salary',
-    price: '₹ 30,000',
-    id: 3,
-    color: '#F8B54C',
-  },
-];
+import CourseDetailsList from '../../Components/Modules/Course/CourseDetailsList';
+import SelectionContainer from '../../Components/RepeatComponents/SelectionContainer';
+import PopularTextHeading from '../../Components/common/PopularTextHeading';
 
 const Course = () => {
   const [search, setSearch] = useState('');
 
-  const renderItem = ({item}) => {
-    return (
-      <View style={styles.mainContainer}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <View
-            style={{...styles.courseContainer, backgroundColor: item.color}}
-          />
-          <View
-            style={{marginTop: spacing.MARGIN_14, width: spacing.WIDTH_260}}>
-            <TextComp text={item.heading} style={styles.courseHeadingStyle} />
-            <TextComp
-              text={item.descrioption}
-              style={styles.courseDescriptionStyle}
-            />
-            <View
-              style={{
-                ...commonStyle.flexRow,
-                ...commonStyle.justifyALignCenter,
-                marginVertical: spacing.MARGIN_10,
-              }}>
-              <View
-                style={{
-                  ...commonStyle.flexRow,
-                  alignItems: 'center',
-                }}>
-                <Image
-                  source={ImagePath.IC_Rectangle}
-                  style={{
-                    width: spacing.WIDTH_16,
-                    height: spacing.HEIGHT_16,
-                    marginHorizontal: spacing.MARGIN_8,
-                  }}
-                />
-                <TextComp
-                  text={item.accepting_College}
-                  style={styles.acceptingCollegeCount}
-                />
-              </View>
-              <View
-                style={{
-                  ...commonStyle.flexRow,
-                  ...commonStyle.justifyALignCenter,
-                  alignItems: 'center',
-                  marginHorizontal: spacing.MARGIN_10,
-                }}>
-                <Image
-                  source={ImagePath.IC_Rectangle}
-                  style={{
-                    width: spacing.WIDTH_16,
-                    height: spacing.HEIGHT_16,
-                    marginHorizontal: spacing.MARGIN_8,
-                  }}
-                />
-                <TextComp
-                  text={item.Application_date}
-                  style={styles.acceptingCollegeCount}
-                />
-              </View>
-            </View>
-            <TextComp text={item.Exam_data} style={styles.offerCollegeCount} />
-            <View style={styles.horizontalLineStyle} />
-            <View style={styles.averageTextContainer}>
-              <View>
-                <TextComp
-                  text={item.result_data}
-                  style={styles.feeSalaryTextStyle}
-                />
-                <TextComp text={item.price} style={styles.amountTextStyle} />
-              </View>
-              <View style={styles.sepretorLine} />
-              <View>
-                <TextComp
-                  text={item.Average_salary}
-                  style={styles.feeSalaryTextStyle}
-                />
-                <TextComp text={item.price} style={styles.amountTextStyle} />
-              </View>
-            </View>
-          </View>
-          <View>
-            <Image source={ImagePath.IC_MENU} style={styles.menuIconStyle} />
-          </View>
-        </View>
-      </View>
-    );
-  };
-
   return (
     <WapperContainer>
-       <SerachBar
+      <SerachBar
         placeholder="Search here.."
-        source3={ImagePath.IC_MENU}
-        Icon3={{width: spacing.WIDTH_34, height: spacing.HEIGHT_34}}
         value={search}
-        onChangeText={e => setSearch(e)}/>
-      <TextComp
-        text={'Popular Courses In India'}
-        style={styles.popularCourseHeadingTextStyle}
+        onChangeText={e => setSearch(e)}
       />
-      <View style={styles.selectionMainContainer}>
-        <View style={styles.selectionContainer}>
-          <TextComp text="Select Stream" style={styles.selectionTextStyle} />
-          <Image
-            source={ImagePath.IC_DOWN_ARROW}
-            style={styles.downArrowStyle}
-          />
-        </View>
-        <View style={styles.selectionContainer}>
-          <TextComp text="Select Course" style={styles.selectionTextStyle} />
-          <Image
-            source={ImagePath.IC_DOWN_ARROW}
-            style={styles.downArrowStyle}
-          />
-        </View>
-      </View>
-      <TextComp
-        text="Found 33 Courses"
-        style={{
-          textAlign: 'center',
-          marginTop: spacing.MARGIN_10,
-          color: '#9A9A9A',
-          opacity: 9,
-          fontFamily: fontNames.POPPINS_FONT_FAMILY_SEMI_BOLD,
-          fontSize: textScale(12),
-        }}
-      />
-      <FlatList
-        data={dummyData}
-        showsHorizontalScrollIndicator={false}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-      />
+      <PopularTextHeading text={'Popular Courses In India'} />
+      <SelectionContainer />
+      <CourseDetailsList />
     </WapperContainer>
   );
 };
@@ -317,7 +152,7 @@ const styles = StyleSheet.create({
     ...commonStyle.flexRow,
     alignItems: 'center',
     justifyContent: 'space-around',
-    marginBottom:spacing.MARGIN_10
+    marginBottom: spacing.MARGIN_10,
   },
   feeSalaryTextStyle: {
     color: '#0F0C1A',

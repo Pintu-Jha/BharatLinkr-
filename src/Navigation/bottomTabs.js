@@ -14,9 +14,12 @@ import * as Screen from '../screens/index';
 import ImagePath from '../Utills/ImagePath';
 import navigationString from './navigationString';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 import {textScale, width} from '../styles/responsiveStyles';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 const activeTabColor = '#6753a3';
 const inActiveTabColor = '#C8C1DF';
 const tabBarColor = '#fffefe';
@@ -50,15 +53,48 @@ const tabData = [
     name: navigationString.PRACTICE_SCREEN,
     label: 'Practice',
     icon: ImagePath.IC_Practice,
-    component: Screen.Practice,
+    component: Practice,
   },
   {
     name: navigationString.CORPORETION_SCREEN,
     label: 'Corporate',
     icon: ImagePath.IC_CORPORETE,
-    component: Screen.Corporete,
+    component: Screen.Corporate,
   },
 ];
+
+function Practice() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen
+          name={navigationString.PRACTICE_SCREEN}
+          component={Screen.Practice}
+        />
+        <Stack.Screen
+          name={navigationString.MOCK_TEST_List_SCREEN}
+          component={Screen.MockTestList}
+        />
+        <Stack.Screen
+          name={navigationString.MOCK_INSTRUCATION_SCREEN}
+          component={Screen.Instrucation}
+        />
+        <Stack.Screen
+          name={navigationString.MOCK_TEST_SCREEN}
+          component={Screen.MockTest}
+        />
+        <Stack.Screen
+          name={navigationString.MOCK_TEST_ACTIVITY_SCREEN}
+          component={Screen.MockTestActivity}
+        />
+        <Stack.Screen
+          name={navigationString.MOCK_TEST_SCORE_SCREEN}
+          component={Screen.MockTestScore}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 function BottomTabs({}) {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -116,7 +152,13 @@ function BottomTabs({}) {
                             resizeMode="contain"
                           />
 
-                          <Text style={[styles.label]}>{item.label}</Text>
+                          <Text
+                            style={[
+                              styles.label,
+                              focused && {color: '#6753a3'},
+                            ]}>
+                            {item.label}
+                          </Text>
                         </View>
                       </View>
                     );

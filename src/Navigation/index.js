@@ -18,6 +18,10 @@ function AppStack({}) {
             name={navigationString.BOTTON_TAB_BAR}
             component={bottomTabs}
           />
+           {/* <Stack.Screen
+            name={navigationString.MOCK_TEST_SCREEN}
+            component={screen.MockTest}
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </View>
