@@ -9,3 +9,11 @@ export {default as Instrucation} from '../Components/Modules/Practice/Instrucati
 export {default as MockTest} from '../Components/Modules/Practice/MockTest';  
 export {default as MockTestActivity} from '../Components/Modules/Practice/MockTestActivity';  
 export {default as MockTestScore} from '../Components/Modules/Practice/MockTestScore';  
+export {default as MessageScreen} from '../screens/MessageScreen/MessageScreen';  
+export {default as RequestLinks} from '../screens/RequestLinkScreen/RequestLinks';  
+export {default as ChatScreen} from '../screens/ChatScreen/ChatScreen';  
+export {default as CollegeInnerPage} from '../Components/Modules/College/CollegeInnerPage';  
+export {default as EditProfile} from '../screens/EditProfile/EditProfile';  
+export {default as SignupScreen} from '../screens/SignupScreen/SignupScreen';  
+export {default as LoginScreen} from '../screens/LoginScreen/LoginScreen';  
+export {default as OtpVerification} from '../screens/OtpScreen/OtpVerification';  

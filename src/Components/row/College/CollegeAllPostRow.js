@@ -1,14 +1,19 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
 import {spacing} from '../../../styles/spacing';
 import {textScale} from '../../../styles/responsiveStyles';
 import {fontNames} from '../../../styles/typography';
 import ImagePath from '../../../Utills/ImagePath';
 import commonStyle from '../../../styles/commonStyle';
 import TextComp from '../../../Components/common/TextComp';
-import { boxShadow } from '../../../styles/Mixins';
+import {boxShadow} from '../../../styles/Mixins';
+import navigationString from '../../../Navigation/navigationString';
+import {useNavigation} from '@react-navigation/native';
 
 const CollegeAllPostRow = ({item}) => {
+  const navigation = useNavigation();
+  const [isOptionVisible, setIsOptionVisible] = useState(false);
+  // console.log(item.heading);
   return (
     <View style={styles.mainContainer}>
       <View
@@ -24,12 +29,19 @@ const CollegeAllPostRow = ({item}) => {
             marginTop: spacing.MARGIN_14,
             width: spacing.WIDTH_275,
           }}>
-          <View
+          <TouchableOpacity
             style={{
               ...commonStyle.flexRow,
               alignItems: 'center',
               justifyContent: 'space-evenly',
-            }}>
+            }}
+            onPress={() =>
+              navigation.navigate(navigationString.COLLEGE_INNER_PAGE, {
+                college: item.item.heading,
+                address: item.item.address,
+                BOARD:item.item.UGC
+              })
+            }>
             <Image
               source={ImagePath.COLLEGE_IMAGE}
               style={{
@@ -42,7 +54,7 @@ const CollegeAllPostRow = ({item}) => {
               text={item.item.heading}
               style={styles.courseHeadingStyle}
             />
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               ...commonStyle.flexRow,
@@ -88,9 +100,9 @@ const CollegeAllPostRow = ({item}) => {
             </View>
           </View>
         </View>
-        <View>
+        <TouchableOpacity onPress={() => setIsOptionVisible(!isOptionVisible)}>
           <Image source={ImagePath.IC_MENU} style={styles.menuIconStyle} />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.horizontalLineStyle} />
       <View style={styles.averageTextContainer}>
@@ -161,6 +173,44 @@ const CollegeAllPostRow = ({item}) => {
           <TextComp text={'125'} style={styles.socialCountTextStyle} />
         </View>
       </View>
+      {isOptionVisible && (
+        <View
+          style={{
+            maxWidth: spacing.WIDTH_220,
+            maxHeight: spacing.HEIGHT_150,
+            backgroundColor: '#fff',
+            elevation: 4,
+            position: 'absolute',
+            top: 50,
+            right: 20,
+            alignContent: 'center',
+            justifyContent: 'center',
+            width: spacing.WIDTH_116,
+            height: spacing.HEIGHT_80,
+          }}>
+          <TouchableOpacity>
+            <TextComp
+              text="Courses & Fees"
+              style={{
+                textAlign: 'center',
+                fontSize: textScale(13),
+                color: '#0F0C1A',
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <TextComp
+              text="Apply Now"
+              style={{
+                textAlign: 'center',
+                marginTop: spacing.MARGIN_12,
+                fontSize: textScale(13),
+                color: '#0F0C1A',
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
@@ -197,6 +247,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: spacing.MARGIN_16,
     borderRadius: spacing.RADIUS_4,
+    flex:1
   },
   courseContainer: {
     width: spacing.WIDTH_4,

@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CategoryListRow from '../../row/Home/CategoryListRow';
 import {useSelector} from 'react-redux';
 import {iSselected} from '../../../Redux/actions/categoryPost';
@@ -8,7 +8,12 @@ const CategoryList = () => {
   const filterData = useSelector(state => state?.categoryPost?.category);
   const [selectedItem, setSelectedItem] = useState(filterData[0]?.type);
   // console.log(selectedItem);
-  iSselected(selectedItem);
+  useEffect(() => {
+    if (selectedItem) {
+      iSselected(selectedItem);
+    }
+  }, [selectedItem]);
+ 
   const handleItemPress = item => {
     setSelectedItem(item);
   };

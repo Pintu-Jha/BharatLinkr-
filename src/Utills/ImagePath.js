@@ -49,6 +49,13 @@ export default {
   IC_SKIP_QUESTION: require('../assets/images/skipQuestion.png'),
   IC_WRONG_QUESTION: require('../assets/images/wrongQuestion.png'),
   IC_CORRECT_QUESTION: require('../assets/images/correctQuestion.png'),
+  IC_UPLOAD_IMG: require('../assets/images/uploadIMG.png'),            
+  IC_SEND_MESSAGE: require('../assets/images/sendMessage.png'),            
+  IC_Eligibility: require('../assets/images/Eligibility.png'),            
+  IC_STAR: require('../assets/images/star.png'),            
+  IC_EXAM_FOR_COURSE: require('../assets/images/EXAM_FORCOURS.png'),            
+  IC_REVIEW_REACTION: require('../assets/images/revireReaction.png'),            
+  IC_CALENDAR: require('../assets/images/calendar.png'),            
 
   // profile image
   Profile: require('../assets/images/profile.png'),
@@ -56,5 +63,9 @@ export default {
   STATUS_PERSON_IMAGE: require('../assets/images/person.jpg'),
   Other_PROFILE: require('../assets/images/otherProfile.png'),
   DEMO_PROGRESS: require('../assets/images/demoProgress.png'),
+  DP: require('../assets/images/DP.png'),
+  DP_1: require('../assets/images/DP_1.png'),
+  COLLEGE_BG_IMG: require('../assets/images/backgroundCollegeImg.png'),
+  COVER_PHOTO: require('../assets/images/coverPhoto.jpg'),
 
 };

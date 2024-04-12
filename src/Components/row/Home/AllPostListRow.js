@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: spacing.MARGIN_12,
     borderRadius: spacing.RADIUS_4,
-    marginHorizontal: spacing.MARGIN_16,
+    marginHorizontal: spacing.MARGIN_2,
     paddingVertical: spacing.PADDING_8,
     ...boxShadow(),
   },

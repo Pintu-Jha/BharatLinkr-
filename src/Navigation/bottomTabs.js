@@ -66,7 +66,14 @@ const tabData = [
 function Practice() {
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          presentation: 'modal',
+          animation: 'slide_from_right',
+          animationTypeForReplace: 'push',
+          // animationDuration:.2
+        }} >
         <Stack.Screen
           name={navigationString.PRACTICE_SCREEN}
           component={Screen.Practice}
@@ -106,6 +113,7 @@ function BottomTabs({}) {
             tabBarShowLabel: false,
             tabBarActiveTintColor: activeTabColor,
             tabBarInactiveTintColor: inActiveTabColor,
+            
             tabBarStyle: {
               backgroundColor: tabBarColor,
               paddingBottom: 0,

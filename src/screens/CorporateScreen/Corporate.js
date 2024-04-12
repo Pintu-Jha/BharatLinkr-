@@ -16,6 +16,7 @@ import {fontNames} from '../../styles/typography';
 import TextComp from '../../Components/common/TextComp';
 import TextImputComp from '../../Components/common/TextImputComp';
 import BottonComp from '../../Components/common/BottonComp';
+import { boxShadow } from '../../styles/Mixins';
 
 const dummyData = [
   {title1: 'Jobs', id: '1'},
@@ -102,7 +103,9 @@ const Corporate = () => {
           style={{
             width: spacing.FULL_WIDTH / 1.1,
             alignSelf: 'center',
-            borderWidth: 0.5,
+            // borderWidth: 0.5,
+            ...boxShadow(),
+            backgroundColor:'#fff'
           }}>
           {dummyData.map(item => {
             return (

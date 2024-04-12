@@ -2,6 +2,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import AllPostListRow from '../../row/Home/AllPostListRow';
 import { useSelector } from 'react-redux';
+import { spacing } from '../../../styles/spacing';
 
 
 const AllPostList = () => {

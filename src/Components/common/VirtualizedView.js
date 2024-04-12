@@ -10,7 +10,7 @@ class VirtualizedView extends PureComponent {
     render() {
 
         return (
-            <View style={[{ flex: 1 }]} >
+            <View style={[{ flex: 1 ,backgroundColor:"#FCFCFC"}]} >
                 <FlatList
                     data={[]}
                     ListEmptyComponent={null}

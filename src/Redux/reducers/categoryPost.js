@@ -15,7 +15,7 @@ const categoryPost = createSlice({
     ],
     selectedItem:null,
   },
-  reducers: {
+  reducers: { 
     categoryList: (state, action) => {
       state.category = action.payload;
     },

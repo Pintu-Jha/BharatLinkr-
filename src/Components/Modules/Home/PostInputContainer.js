@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
         fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
         opacity: 0.76,
         paddingHorizontal: spacing.PADDING_6,
+        overflow:'hidden',
       },
 })

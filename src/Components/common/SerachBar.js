@@ -29,6 +29,8 @@ const SerachBar = ({
   source3,
   Icon3 = {},
   placeholderTextColor = '#0F0C1A',
+  msgOnpress,
+  menuPress,
   ...props
 }) => {
   // console.log(source3);
@@ -42,6 +44,7 @@ const SerachBar = ({
         height: spacing.HEIGHT_70,
         paddingHorizontal: spacing.PADDING_20,
         ...boxShadow(),
+        // flex:1
       }}>
       <View style={{alignItems: 'center'}}>
         <Image
@@ -57,7 +60,8 @@ const SerachBar = ({
         style={{
           ...styles.inputStyle,
           ...inputStyle,
-          flex: 0.55,
+          // flex: 0.55,
+          flex: 1,
         }}>
         <TextInput
           style={{
@@ -77,7 +81,8 @@ const SerachBar = ({
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
-          flex: 0.45,
+          // flex: 0.2,
+          // flex:1,
           marginLeft: spacing.MARGIN_10,
         }}>
         {rightNotificationImage ? (
@@ -90,12 +95,12 @@ const SerachBar = ({
         ) : null}
 
         {rightMassageImage ? (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={msgOnpress}>
             <Image style={styles.iconStyle} source={ImagePath.IC_MESSAGE} />
           </TouchableOpacity>
         ) : null}
         {rightMenuImage ? (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={menuPress} activeOpacity={1}>
             <Image
               style={{
                 ...styles.iconStyle,
@@ -134,7 +139,8 @@ const styles = StyleSheet.create({
     width: spacing.WIDTH_24,
     height: spacing.HEIGHT_24,
     opacity: 1,
-    resizeMode:'contain'
+    resizeMode: 'contain',
+    marginHorizontal: spacing.MARGIN_4,
   },
   searchImage: {
     tintColor: '#0F0C1A',

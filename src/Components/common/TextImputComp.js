@@ -30,7 +30,7 @@ const TextImputComp = ({
     <View style={{...styles.inputStyle, ...inputStyle}}>
       {!!profileImage ? <Image source={ImagePath.Other_PROFILE} /> : null}
       <TextInput
-        style={{...styles.textStyle,...textScale}}
+        style={{...styles.textStyle, ...textScale}}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -46,6 +46,7 @@ const TextImputComp = ({
             justifyContent: 'space-around',
             width: spacing.WIDTH_80,
             height: spacing.HEIGHT_52,
+            overflow: 'hidden',
           }}>
           <TouchableOpacity>
             <Image

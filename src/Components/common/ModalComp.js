@@ -13,7 +13,7 @@ const ModalComp = ({
    <Modal 
    isVisible={isVisible}
   //  backdropColor='#FCFCFC'
-   backdropOpacity={.2}
+   backdropOpacity={0}
    onBackdropPress={onBackdropPress}
    style={{...styles.style,...style}}
    {...props}

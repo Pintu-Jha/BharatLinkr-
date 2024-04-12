@@ -18,7 +18,7 @@ const BottonComp = ({
     <TouchableOpacity
       style={{...styles.container, ...style}}
       onPress={onPress}
-      activeOpacity={0.6}>
+      activeOpacity={0.8}>
       {!!leftImg ? (
         <Image source={source} style={{...styles.IconStyle, ...IconStyle}} />
       ) : null}
