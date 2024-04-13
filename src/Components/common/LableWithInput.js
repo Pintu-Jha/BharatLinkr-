@@ -28,7 +28,7 @@ const LableWithInput = ({
   SecureImage = false,
   keyboardType,
   inputMainContainer,
-  multiline=false,
+  multiline = false,
   ...props
 }) => {
   return (
@@ -36,7 +36,7 @@ const LableWithInput = ({
       <TextComp text={lableText} style={styles.lableTextStyle} />
       <View style={{...styles.inputStyle, ...inputStyle}}>
         <TextInput
-          style={{...styles.textStyle,...textStyle}}
+          style={{...styles.textStyle, ...textStyle}}
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
@@ -49,12 +49,9 @@ const LableWithInput = ({
         {!!SecureImage ? (
           <TouchableOpacity activeOpacity={0.5} onPress={onPressSecure}>
             {!!secureText ? (
-              <Image source={ImagePath.ICON_HIDE} style={styles.iconstyle} />
+              <Image source={ImagePath.IC_HIDE_EYE} style={styles.iconstyle} />
             ) : (
-              <Image
-                source={ImagePath.ICON_VISIABLE}
-                style={styles.iconstyle}
-              />
+              <Image source={ImagePath.IC_VIEWS} style={styles.iconstyle} />
             )}
           </TouchableOpacity>
         ) : null}
@@ -81,12 +78,14 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#C8C1DF',
     fontFamily: fontNames.POPPINS_FONT_FAMILY_REGULAR,
-    padding:spacing.PADDING_10,
+    padding: spacing.PADDING_10,
   },
   iconstyle: {
-    width: spacing.WIDTH_24,
-    height: spacing.HEIGHT_24,
-    resizeMode:'contain'
+    width: spacing.WIDTH_20,
+    height: spacing.HEIGHT_20,
+    resizeMode: 'contain',
+    tintColor: '#463196',
+    marginRight: spacing.MARGIN_12,
   },
   lableTextStyle: {
     color: '#463196',
@@ -94,7 +93,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginLeft: spacing.MARGIN_12,
     fontFamily: fontNames.POPPINS_FONT_FAMILY_SEMI_BOLD,
-    marginTop:spacing.MARGIN_10
+    marginTop: spacing.MARGIN_10,
   },
-
 });

@@ -56,6 +56,7 @@ export default {
   IC_EXAM_FOR_COURSE: require('../assets/images/EXAM_FORCOURS.png'),            
   IC_REVIEW_REACTION: require('../assets/images/revireReaction.png'),            
   IC_CALENDAR: require('../assets/images/calendar.png'),            
+  IC_HIDE_EYE: require('../assets/images/hideEye.png'),            
 
   // profile image
   Profile: require('../assets/images/profile.png'),

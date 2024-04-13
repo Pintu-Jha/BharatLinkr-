@@ -18,7 +18,7 @@ function AppStack() {
             animation: 'slide_from_right',
             animationTypeForReplace: 'push',
           }}>
-          {false ? MainStack(Stack) : AuthStack(Stack)}
+          {true ? MainStack(Stack) : AuthStack(Stack)}
         </Stack.Navigator>
       </NavigationContainer>
     </View>

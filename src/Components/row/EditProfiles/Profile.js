@@ -24,7 +24,28 @@ const dummyData = [
   {title1: 'Female', id: '2'},
   {title1: 'Other', id: '3'},
 ];
-
+const languageLevel = [
+  {
+    level: 'Native',
+    id: 1,
+  },
+  {
+    level: 'Professional',
+    id: 2,
+  },
+  {
+    level: 'Conversational',
+    id: 3,
+  },
+  {
+    level: 'Elemantary',
+    id: 4,
+  },
+  {
+    level: 'No Proficiency',
+    id: 5,
+  },
+];
 const Profile = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState('dd/mm/yyyy');
@@ -33,9 +54,16 @@ const Profile = () => {
   const [selectedWorkStartDate, setSelectedWorkStratDate] =
     useState('dd/mm/yyyy');
   const [selectedWorkEndDate, setSelectedWorkEndDate] = useState('dd/mm/yyyy');
+  const [selectedProjectStartDate, setSelectedProjectSartDate] =
+    useState('dd/mm/yyyy');
+  const [selectedProjectEndDate, setSelectedProjectEndDate] =
+    useState('dd/mm/yyyy');
   const [selectGender, setSelectGender] = useState('Select');
   const [isGenderSelect, setIsGenderSelect] = useState(false);
+  const [isLanguageLevelSelect, setIsLanguageLevelSelect] = useState(false);
+  const [islanguageLevel, setLanguageLevel] = useState('Level');
   const [dateModalId, setDateModalId] = useState(0);
+  const [profileSummary, setProfileSummary] = useState('');
   const [date, setDate] = useState('');
 
   const showDatePicker = () => {
@@ -81,6 +109,20 @@ const Profile = () => {
     setSelectedWorkEndDate(x[2] + '/' + x[1] + '/' + x[0]);
     hideDatePicker();
   };
+  const handleConfirmProjectStartDate = date => {
+    const dt = new Date(date);
+    const stringFormateDate = dt.toISOString().split('T');
+    const x = stringFormateDate[0].split('-');
+    setSelectedProjectSartDate(x[2] + '/' + x[1] + '/' + x[0]);
+    hideDatePicker();
+  };
+  const handleConfirmProjectEndtDate = date => {
+    const dt = new Date(date);
+    const stringFormateDate = dt.toISOString().split('T');
+    const x = stringFormateDate[0].split('-');
+    setSelectedProjectEndDate(x[2] + '/' + x[1] + '/' + x[0]);
+    hideDatePicker();
+  };
 
   const handleConfirm = date => {
     if (dateModalId == 0) {
@@ -91,8 +133,12 @@ const Profile = () => {
       handleConfirmEndAcademicStart(date);
     } else if (dateModalId == 3) {
       handleConfirmWorkStartDate(date);
-    } else {
+    } else if (dateModalId == 4) {
       handleConfirmWorkEndDate(date);
+    } else if (dateModalId == 5) {
+      handleConfirmProjectStartDate(date);
+    } else {
+      handleConfirmProjectEndtDate(date);
     }
   };
   const gender = title => {
@@ -225,7 +271,7 @@ const Profile = () => {
       </View>
       <View style={styles.tabContainer}>
         <AnimatedComponentToggale
-          initialHeight={spacing.FULL_HEIGHT/2.22 }
+          initialHeight={spacing.FULL_HEIGHT / 2.22}
           tabName="Academic Details">
           <LableWithInput
             lableText="Degree And Field of Study"
@@ -237,119 +283,115 @@ const Profile = () => {
             inputStyle={styles.inputStyle}
             placeholder="School or University"
           />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginTop:spacing.MARGIN_12
-              }}>
-              <TextComp
-                text="Starting Period"
-                style={{...styles.lableTextStyle}}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: spacing.MARGIN_12,
+            }}>
+            <TextComp
+              text="Starting Period"
+              style={{...styles.lableTextStyle}}
+            />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TextComp text={selectedStartDate} style={styles.dateTextStyle} />
+              <TouchableOpacity
+                onPress={() => {
+                  setDateModalId(1);
+                  showDatePicker();
+                }}>
+                <Image
+                  source={ImagePath.IC_CALENDAR}
+                  style={styles.calendarIconStyle}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: spacing.MARGIN_12,
+            }}>
+            <TextComp text="Ending Period" style={styles.lableTextStyle} />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TextComp text={selectedEndDate} style={styles.dateTextStyle} />
+              <TouchableOpacity
+                onPress={() => {
+                  setDateModalId(2);
+                  showDatePicker();
+                }}>
+                <Image
+                  source={ImagePath.IC_CALENDAR}
+                  style={styles.calendarIconStyle}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: spacing.MARGIN_12,
+            }}>
+            <TextComp text="C.G.P.A" style={styles.lableTextStyle} />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TextInput
+                placeholder="C.G.P.A"
+                placeholderTextColor={'#000'}
+                style={{
+                  ...styles.locationTextInputStyle,
+                  flex: 0,
+                  marginTop: 0,
+                  paddingBottom: 0,
+                  width: spacing.FULL_WIDTH / 3,
+                  marginHorizontal: spacing.MARGIN_12,
+                }}
               />
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TextComp
-                  text={selectedStartDate}
-                  style={styles.dateTextStyle}
-                />
-                <TouchableOpacity
-                  onPress={() => {
-                    setDateModalId(1);
-                    showDatePicker();
-                  }}>
-                  <Image
-                    source={ImagePath.IC_CALENDAR}
-                    style={styles.calendarIconStyle}
-                  />
-                </TouchableOpacity>
-              </View>
+              <TextComp
+                text="/10"
+                style={{
+                  fontSize: textScale(12),
+                  fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                  marginTop: spacing.MARGIN_10,
+                }}
+              />
             </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginTop:spacing.MARGIN_12
-              }}>
-              <TextComp text="Ending Period" style={styles.lableTextStyle} />
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TextComp text={selectedEndDate} style={styles.dateTextStyle} />
-                <TouchableOpacity
-                  onPress={() => {
-                    setDateModalId(2);
-                    showDatePicker();
-                  }}>
-                  <Image
-                    source={ImagePath.IC_CALENDAR}
-                    style={styles.calendarIconStyle}
-                  />
-                </TouchableOpacity>
-              </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <TextComp text="Percentage" style={styles.lableTextStyle} />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TextInput
+                placeholder="%"
+                placeholderTextColor={'#000'}
+                style={{
+                  ...styles.locationTextInputStyle,
+                  flex: 0,
+                  marginTop: 0,
+                  paddingBottom: 0,
+                  width: spacing.FULL_WIDTH / 3,
+                  marginHorizontal: spacing.MARGIN_12,
+                }}
+              />
+              <TextComp
+                text="%"
+                style={{
+                  fontSize: textScale(16),
+                  fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                  marginTop: spacing.MARGIN_10,
+                }}
+              />
             </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginTop:spacing.MARGIN_12
-              }}>
-              <TextComp text="C.G.P.A" style={styles.lableTextStyle} />
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TextInput
-                  placeholder="C.G.P.A"
-                  placeholderTextColor={'#000'}
-                  style={{
-                    ...styles.locationTextInputStyle,
-                    flex: 0,
-                    marginTop: 0,
-                    paddingBottom: 0,
-                    width: spacing.FULL_WIDTH / 3,
-                    marginHorizontal: spacing.MARGIN_12,
-                  }}
-                />
-                <TextComp
-                  text="/10"
-                  style={{
-                    fontSize: textScale(12),
-                    fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
-                    marginTop: spacing.MARGIN_10,
-                  }}
-                />
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <TextComp text="Percentage" style={styles.lableTextStyle} />
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TextInput
-                  placeholder="%"
-                  placeholderTextColor={'#000'}
-                  style={{
-                    ...styles.locationTextInputStyle,
-                    flex: 0,
-                    marginTop: 0,
-                    paddingBottom: 0,
-                    width: spacing.FULL_WIDTH / 3,
-                    marginHorizontal: spacing.MARGIN_12,
-                  }}
-                />
-                <TextComp
-                  text="%"
-                  style={{
-                    fontSize: textScale(16),
-                    fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
-                    marginTop: spacing.MARGIN_10,
-                  }}
-                />
-              </View>
-            </View>
-
+          </View>
         </AnimatedComponentToggale>
       </View>
       <View style={styles.tabContainer}>
@@ -480,6 +522,161 @@ const Profile = () => {
           </View>
         </AnimatedComponentToggale>
       </View>
+      <View style={styles.tabContainer}>
+        <AnimatedComponentToggale
+          initialHeight={spacing.FULL_HEIGHT / 4.3}
+          tabName="ACCOMPLISHMENTS">
+          <LableWithInput
+            lableText="Title"
+            inputStyle={styles.inputStyle}
+            placeholder="Title"
+          />
+          <LableWithInput
+            lableText="About"
+            inputStyle={styles.inputStyle}
+            placeholder="About"
+          />
+        </AnimatedComponentToggale>
+      </View>
+      <View style={styles.tabContainer}>
+        <AnimatedComponentToggale
+          initialHeight={spacing.FULL_HEIGHT / 1.6}
+          tabName="PROJECT DETAILS">
+          <LableWithInput
+            lableText="Project Name"
+            inputStyle={styles.inputStyle}
+            placeholder="Project Name"
+          />
+          <LableWithInput
+            lableText="Project Description"
+            inputStyle={styles.inputStyle}
+            placeholder="Project Description"
+          />
+          <LableWithInput
+            lableText="Location"
+            inputStyle={styles.inputStyle}
+            placeholder="Project Location"
+          />
+          <LableWithInput
+            lableText="Link"
+            inputStyle={styles.inputStyle}
+            placeholder="URL"
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: spacing.MARGIN_16,
+            }}>
+            <TextComp
+              text="Starting Period"
+              style={{...styles.lableTextStyle}}
+            />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TextComp
+                text={selectedProjectStartDate}
+                style={styles.dateTextStyle}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setDateModalId(5);
+                  showDatePicker();
+                }}>
+                <Image
+                  source={ImagePath.IC_CALENDAR}
+                  style={styles.calendarIconStyle}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: spacing.MARGIN_12,
+            }}>
+            <TextComp text="Ending Period" style={styles.lableTextStyle} />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TextComp
+                text={selectedProjectEndDate}
+                style={styles.dateTextStyle}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setDateModalId(6);
+                  showDatePicker();
+                }}>
+                <Image
+                  source={ImagePath.IC_CALENDAR}
+                  style={styles.calendarIconStyle}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <LableWithInput
+            multiline={true}
+            inputStyle={{...styles.inputStyle}}
+            placeholder="Short Summary of Your Project"
+          />
+        </AnimatedComponentToggale>
+      </View>
+      <View style={styles.tabContainer}>
+        <AnimatedComponentToggale
+          initialHeight={spacing.FULL_HEIGHT / 4.3}
+          tabName="TRAINING/CERTIFICATIONS">
+          <LableWithInput
+            lableText="Training Name"
+            inputStyle={styles.inputStyle}
+            placeholder="Training Name"
+          />
+          <LableWithInput
+            lableText="Institute Name"
+            inputStyle={styles.inputStyle}
+            placeholder="Institute Name"
+          />
+        </AnimatedComponentToggale>
+      </View>
+      <View style={styles.tabContainer}>
+        <AnimatedComponentToggale
+          initialHeight={spacing.FULL_HEIGHT / 3}
+          tabName="OTHER DETAILS">
+          <LableWithInput
+            lableText="Interests/Hobbies"
+            inputStyle={styles.inputStyle}
+            placeholder="Enter your Interests/Hobbies"
+          />
+          <LableWithInput
+            lableText="Languages"
+            inputStyle={{...styles.inputStyle}}
+            placeholder="Enter you Languages"
+          />
+          <TouchableOpacity
+            style={styles.languageLevelContainer}
+            onPress={() => setIsLanguageLevelSelect(!isLanguageLevelSelect)}
+            activeOpacity={0.8}>
+            <BottonComp
+              text={islanguageLevel}
+              style={{height: spacing.HEIGHT_46, borderColor: '#fff'}}
+              textStyle={{color: '#463196'}}
+            />
+            <Image source={ImagePath.IC_DOWN_ARROW} />
+          </TouchableOpacity>
+        </AnimatedComponentToggale>
+      </View>
+      <View style={styles.summaryContainer}>
+        <TextComp
+          text="Write Your Summary"
+          style={styles.summaryTextHeadingStyle}
+        />
+        <TextInput
+          style={styles.summaryTextInput}
+          multiline={true}
+          value={profileSummary}
+          onChangeText={e => setProfileSummary(e)}
+        />
+      </View>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
@@ -524,6 +721,31 @@ const Profile = () => {
               </View>
             );
           })}
+        </View>
+      ) : null}
+      {isLanguageLevelSelect ? (
+        <View style={styles.languageLevelModalContainer}>
+          {languageLevel.map(item => (
+            <TouchableOpacity
+              style={{
+                marginHorizontal: spacing.MARGIN_16,
+                marginVertical: spacing.MARGIN_6,
+              }}
+              onPress={e => {
+                setLanguageLevel(item.level);
+                setIsLanguageLevelSelect(false);
+              }}
+              key={String(item.id)}>
+              <TextComp
+                text={item.level}
+                style={{
+                  fontFamily: fontNames.POPPINS_FONT_FAMILY_REGULAR,
+                  fontSize: textScale(14),
+                  color: '#463196',
+                }}
+              />
+            </TouchableOpacity>
+          ))}
         </View>
       ) : null}
     </VirtualizedView>
@@ -617,5 +839,51 @@ const styles = StyleSheet.create({
     color: '#0d0d0d',
     fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
     fontSize: textScale(11),
+  },
+  languageLevelContainer: {
+    marginBottom: spacing.MARGIN_16,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: spacing.PADDING_20,
+    backgroundColor: '#fff',
+    borderRadius: spacing.RADIUS_8,
+    marginTop: spacing.MARGIN_16,
+    ...boxShadow('#000d0d', {height: 3, width: 1}, 2, 1),
+    marginHorizontal: spacing.MARGIN_8,
+  },
+  summaryContainer: {
+    marginHorizontal: spacing.MARGIN_18,
+    height: spacing.FULL_HEIGHT / 3,
+    marginBottom: spacing.MARGIN_30,
+    borderRadius: spacing.RADIUS_8,
+    ...boxShadow(),
+    backgroundColor: '#fff',
+  },
+  summaryTextHeadingStyle: {
+    paddingLeft: spacing.PADDING_16,
+    paddingTop: spacing.PADDING_16,
+    fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+    opacity: 1,
+    fontSize: textScale(14),
+    color: '#878787',
+  },
+  summaryTextInput: {
+    padding: spacing.PADDING_16,
+    color: '#0d0d0d',
+    fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+    fontSize: textScale(14),
+  },
+  languageLevelModalContainer: {
+    height: spacing.HEIGHT_200,
+    width: spacing.WIDTH_250,
+    backgroundColor: '#fff',
+    position: 'absolute',
+    bottom: spacing.HEIGHT_150,
+    alignSelf: 'center',
+    left: spacing.WIDTH_40,
+    borderWidth: 1,
+    borderColor: '#878787',
+    borderRadius: spacing.RADIUS_8,
   },
 });

@@ -45,6 +45,7 @@ export const spacing = {
   HEIGHT_350: verticalScale(350),
   HEIGHT_320: verticalScale(320),
   HEIGHT_300: verticalScale(300),
+  HEIGHT_290: verticalScale(290),
   HEIGHT_280: verticalScale(280),
   HEIGHT_270: verticalScale(270),
   HEIGHT_260: verticalScale(260),
