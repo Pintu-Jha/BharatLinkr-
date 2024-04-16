@@ -32,6 +32,21 @@ export default function (Stack) {
         component={Screen.EditProfile}
         options={{headerShown: false}}
       />
+        <Stack.Screen
+        name={navigationString.FilterUi}
+        component={Screen.FilterUi}
+        options={{headerShown: false}}
+      />
+         <Stack.Screen
+        name={navigationString.EXAM_FILTER_SCREEN}
+        component={Screen.ExamFilter}
+        options={{headerShown: false}}
+      />
+        <Stack.Screen
+        name={navigationString.College_FILTER_SCREEN}
+        component={Screen.CollegeFilter}
+        options={{headerShown: false}}
+      />
     </>
   );
 }

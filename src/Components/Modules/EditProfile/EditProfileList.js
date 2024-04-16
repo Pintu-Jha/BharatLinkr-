@@ -3,8 +3,7 @@ import React, {useState} from 'react';
 import Profile from '../../row/EditProfiles/Profile';
 import TextComp from '../../common/TextComp';
 import {spacing} from '../../../styles/spacing';
-import SerachBar from '../../common/SerachBar';
-import {boxShadow, boxShadowLess} from '../../../styles/Mixins';
+import {boxShadowLess} from '../../../styles/Mixins';
 import {textScale} from '../../../styles/responsiveStyles';
 import {fontNames} from '../../../styles/typography';
 import Inbox from '../../row/EditProfiles/Inbox';
@@ -39,7 +38,6 @@ const EditProfileList = () => {
   const [selectedTab, setSelectedTab] = useState(1);
   return (
     <View style={{flex: 1}}>
-      <SerachBar placeholder="Search here..." />
       <View
         style={{
           marginVertical: spacing.MARGIN_12,

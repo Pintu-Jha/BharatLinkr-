@@ -1,14 +1,358 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React from 'react';
+import VirtualizedView from '../../common/VirtualizedView';
+import EditIndox from '../../Modules/Table/EditIndox';
+import {spacing} from '../../../styles/spacing';
+import {boxShadow} from '../../../styles/Mixins';
+import {useNavigation} from '@react-navigation/native';
+import navigationString from '../../../Navigation/navigationString';
+import ImagePath from '../../../Utills/ImagePath';
+
+const dummyData = [
+  {
+    id: 1,
+    post_category: 'Hiring',
+    post_title: 'Web Developer',
+    post_by: 'Pintu Jha',
+    post_date: '12/04/2024',
+    status: 'pending',
+    contact_no: '123-456-7890',
+    email_id: 'pintu@example.com',
+    education: 'Bachelor of Science in Computer Science',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '10/04/2024',
+    location: 'San Francisco, CA',
+  },
+  {
+    id: 2,
+    post_category: 'Hiring',
+    post_title: 'Frontend Developer',
+    post_by: 'John Smith',
+    post_date: '13/04/2024',
+    status: 'approved',
+    contact_no: '987-654-3210',
+    email_id: 'john@example.com',
+    education: 'Master of Computer Applications',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '08/04/2024',
+    location: 'New York, NY',
+  },
+  {
+    id: 3,
+    post_category: 'Job Opening',
+    post_title: 'Full Stack Developer',
+    post_by: 'Jane Doe',
+    post_date: '14/04/2024',
+    status: 'pending',
+    contact_no: '555-123-4567',
+    email_id: 'jane@example.com',
+    education: 'Bachelor of Engineering in Computer Science',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '11/04/2024',
+    location: 'Los Angeles, CA',
+  },
+  {
+    id: 4,
+    post_category: 'Hiring',
+    post_title: 'Software Engineer',
+    post_by: 'Alex Johnson',
+    post_date: '15/04/2024',
+    status: 'pending',
+    contact_no: '444-555-6789',
+    email_id: 'alex@example.com',
+    education: 'Bachelor of Technology in Software Engineering',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '09/04/2024',
+    location: 'Seattle, WA',
+  },
+  {
+    id: 5,
+    post_category: 'Job Vacancy',
+    post_title: 'Backend Developer',
+    post_by: 'Emily Wong',
+    post_date: '16/04/2024',
+    status: 'approved',
+    contact_no: '777-888-9999',
+    email_id: 'emily@example.com',
+    education: 'Master of Science in Information Technology',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '07/04/2024',
+    location: 'Chicago, IL',
+  },
+  {
+    id: 6,
+    post_category: 'Hiring',
+    post_title: 'UI/UX Designer',
+    post_by: 'Sarah Brown',
+    post_date: '17/04/2024',
+    status: 'approved',
+    contact_no: '222-333-4444',
+    email_id: 'sarah@example.com',
+    education: 'Bachelor of Fine Arts in Graphic Design',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '06/04/2024',
+    location: 'Boston, MA',
+  },
+  {
+    id: 7,
+    post_category: 'Job Opening',
+    post_title: 'Data Analyst',
+    post_by: 'Michael Lee',
+    post_date: '18/04/2024',
+    status: 'pending',
+    contact_no: '666-777-8888',
+    email_id: 'michael@example.com',
+    education: 'Bachelor of Science in Statistics',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '05/04/2024',
+    location: 'Denver, CO',
+  },
+  {
+    id: 8,
+    post_category: 'Hiring',
+    post_title: 'Mobile App Developer',
+    post_by: 'David Clark',
+    post_date: '19/04/2024',
+    status: 'pending',
+    contact_no: '111-222-3333',
+    email_id: 'david@example.com',
+    education: 'Master of Computer Science',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '04/04/2024',
+    location: 'Austin, TX',
+  },
+  {
+    id: 9,
+    post_category: 'Job Vacancy',
+    post_title: 'Data Scientist',
+    post_by: 'Jessica Taylor',
+    post_date: '20/04/2024',
+    status: 'approved',
+    contact_no: '999-888-7777',
+    email_id: 'jessica@example.com',
+    education: 'PhD in Data Science',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '03/04/2024',
+    location: 'Miami, FL',
+  },
+  {
+    id: 10,
+    post_category: 'Hiring',
+    post_title: 'Backend Engineer',
+    post_by: 'Ryan Garcia',
+    post_date: '21/04/2024',
+    status: 'pending',
+    contact_no: '333-444-5555',
+    email_id: 'ryan@example.com',
+    education: 'Bachelor of Science in Computer Engineering',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '02/04/2024',
+    location: 'San Diego, CA',
+  },
+  {
+    id: 11,
+    post_category: 'Job Opening',
+    post_title: 'Product Manager',
+    post_by: 'Rachel Wilson',
+    post_date: '22/04/2024',
+    status: 'approved',
+    contact_no: '444-333-2222',
+    email_id: 'rachel@example.com',
+    education: 'MBA in Marketing',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '01/04/2024',
+    location: 'Portland, OR',
+  },
+  {
+    id: 12,
+    post_category: 'Job Vacancy',
+    post_title: 'System Administrator',
+    post_by: 'Adam Thompson',
+    post_date: '23/04/2024',
+    status: 'pending',
+    contact_no: '888-999-0000',
+    email_id: 'adam@example.com',
+    education: 'Bachelor of Technology in Information Technology',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '30/03/2024',
+    location: 'Houston, TX',
+  },
+  {
+    id: 13,
+    post_category: 'Hiring',
+    post_title: 'DevOps Engineer',
+    post_by: 'Chris Roberts',
+    post_date: '24/04/2024',
+    status: 'approved',
+    contact_no: '777-666-5555',
+    email_id: 'chris@example.com',
+    education: 'Bachelor of Science in Computer Engineering',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '29/03/2024',
+    location: 'Phoenix, AZ',
+  },
+  {
+    id: 14,
+    post_category: 'Hiring',
+    post_title: 'Technical Support Specialist',
+    post_by: 'Olivia Anderson',
+    post_date: '25/04/2024',
+    status: 'pending',
+    contact_no: '555-444-3333',
+    email_id: 'olivia@example.com',
+    education: 'Associate Degree in Information Technology',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '28/03/2024',
+    location: 'Philadelphia, PA',
+  },
+  {
+    id: 15,
+    post_category: 'Job Opening',
+    post_title: 'Network Engineer',
+    post_by: 'Sophia Martinez',
+    post_date: '26/04/2024',
+    status: 'approved',
+    contact_no: '222-111-0000',
+    email_id: 'sophia@example.com',
+    education: 'Bachelor of Science in Telecommunications',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '27/03/2024',
+    location: 'Atlanta, GA',
+  },
+  {
+    id: 16,
+    post_category: 'Hiring',
+    post_title: 'Quality Assurance Analyst',
+    post_by: 'Jack Wilson',
+    post_date: '27/04/2024',
+    status: 'pending',
+    contact_no: '666-555-4444',
+    email_id: 'jack@example.com',
+    education: 'Bachelor of Science in Software Testing',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '26/03/2024',
+    location: 'Dallas, TX',
+  },
+  {
+    id: 17,
+    post_category: 'Job Vacancy',
+    post_title: 'UI Designer',
+    post_by: 'Emma Harris',
+    post_date: '28/04/2024',
+    status: 'approved',
+    contact_no: '333-222-1111',
+    email_id: 'emma@example.com',
+    education: 'Bachelor of Fine Arts in Web Design',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '25/03/2024',
+    location: 'Washington, D.C.',
+  },
+  {
+    id: 18,
+    post_category: 'Job Opening',
+    post_title: 'Business Analyst',
+    post_by: 'Lucas Carter',
+    post_date: '29/04/2024',
+    status: 'pending',
+    contact_no: '999-000-1111',
+    email_id: 'lucas@example.com',
+    education: 'Bachelor of Business Administration',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '24/03/2024',
+    location: 'San Jose, CA',
+  },
+  {
+    id: 19,
+    post_category: 'Hiring',
+    post_title: 'Project Manager',
+    post_by: 'Lily White',
+    post_date: '30/04/2024',
+    status: 'approved',
+    contact_no: '111-000-9999',
+    email_id: 'lily@example.com',
+    education: 'Master of Project Management',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '23/03/2024',
+    location: 'Minneapolis, MN',
+  },
+  {
+    id: 20,
+    post_category: 'Job Vacancy',
+    post_title: 'Technical Writer',
+    post_by: 'Noah Davis',
+    post_date: '01/05/2024',
+    status: 'pending',
+    contact_no: '555-666-7777',
+    email_id: 'noah@example.com',
+    education: 'Bachelor of Arts in English',
+    skills: 'JavaScript  React  Node.js',
+    apply_date: '22/03/2024',
+    location: 'Detroit, MI',
+  },
+];
+
+const tableHead = [
+  'Index',
+  'Post Title',
+  'Post Date',
+  'Post Type',
+  'User Name',
+  'User Type',
+  'Contact No.',
+  'Email ID',
+  'Education',
+  'Skills',
+  'Apply Date',
+  'Location',
+];
 
 const Inbox = () => {
+  const navigation = useNavigation();
+  const toggleModal = () => {
+    navigation.navigate(navigationString.FilterUi);
+  };
   return (
-    <View>
-      <Text>Inbox</Text>
-    </View>
-  )
-}
+    <>
+      <VirtualizedView>
+        <View
+          style={{
+            flex: 1,
+          }}>
+          <EditIndox data={dummyData} tableHead={tableHead} />
+        </View>
+      </VirtualizedView>
+      <TouchableOpacity
+        style={{
+          width: spacing.WIDTH_50,
+          height: spacing.HEIGHT_50,
+          position: 'absolute',
+          bottom: spacing.HEIGHT_90,
+          right: spacing.WIDTH_40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#A0BAF3',
+          borderRadius: spacing.HEIGHT_50 / 2,
+        }}
+        onPress={toggleModal}>
+        <Image source={ImagePath.IC_SETTING} />
+      </TouchableOpacity>
+    </>
+  );
+};
 
-export default Inbox
+export default Inbox;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  modalStyle: {
+    backgroundColor: '#FCFCFC',
+    minHeight: spacing.FULL_HEIGHT / 1.5,
+    borderRadius: spacing.RADIUS_8,
+    padding: spacing.PADDING_16,
+    ...boxShadow(),
+  },
+});

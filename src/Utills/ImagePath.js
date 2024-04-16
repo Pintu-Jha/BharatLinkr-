@@ -1,5 +1,5 @@
 export default {
-    //ICONS
+  //ICONS
   IC_HOME: require('../assets/images/home.png'),
   IC_COLLEGE: require('../assets/images/college.png'),
   IC_EXAM: require('../assets/images/corporetion.png'),
@@ -49,14 +49,15 @@ export default {
   IC_SKIP_QUESTION: require('../assets/images/skipQuestion.png'),
   IC_WRONG_QUESTION: require('../assets/images/wrongQuestion.png'),
   IC_CORRECT_QUESTION: require('../assets/images/correctQuestion.png'),
-  IC_UPLOAD_IMG: require('../assets/images/uploadIMG.png'),            
-  IC_SEND_MESSAGE: require('../assets/images/sendMessage.png'),            
-  IC_Eligibility: require('../assets/images/Eligibility.png'),            
-  IC_STAR: require('../assets/images/star.png'),            
-  IC_EXAM_FOR_COURSE: require('../assets/images/EXAM_FORCOURS.png'),            
-  IC_REVIEW_REACTION: require('../assets/images/revireReaction.png'),            
-  IC_CALENDAR: require('../assets/images/calendar.png'),            
-  IC_HIDE_EYE: require('../assets/images/hideEye.png'),            
+  IC_UPLOAD_IMG: require('../assets/images/uploadIMG.png'),
+  IC_SEND_MESSAGE: require('../assets/images/sendMessage.png'),
+  IC_Eligibility: require('../assets/images/Eligibility.png'),
+  IC_STAR: require('../assets/images/star.png'),
+  IC_EXAM_FOR_COURSE: require('../assets/images/EXAM_FORCOURS.png'),
+  IC_REVIEW_REACTION: require('../assets/images/revireReaction.png'),
+  IC_CALENDAR: require('../assets/images/calendar.png'),
+  IC_HIDE_EYE: require('../assets/images/hideEye.png'),
+  IC_ACTION_BREAK: require('../assets/images/actionBreak.png'),
 
   // profile image
   Profile: require('../assets/images/profile.png'),
@@ -68,5 +69,4 @@ export default {
   DP_1: require('../assets/images/DP_1.png'),
   COLLEGE_BG_IMG: require('../assets/images/backgroundCollegeImg.png'),
   COVER_PHOTO: require('../assets/images/coverPhoto.jpg'),
-
 };

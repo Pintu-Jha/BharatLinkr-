@@ -20,4 +20,7 @@ export default {
   LOGIN_SCREEN:'loginScreen',
   SIGNUP_SCREEN:'signupScreen',
   OTP_SCREEN:'optScreen',
+  FilterUi:'filterUi',
+  EXAM_FILTER_SCREEN:'examFilterScreen',
+  College_FILTER_SCREEN:'collegeFilterScreen'
 };

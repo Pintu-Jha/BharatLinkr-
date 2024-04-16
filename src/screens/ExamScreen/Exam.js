@@ -1,4 +1,11 @@
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import WapperContainer from '../../Components/common/WapperContainer';
 import SerachBar from '../../Components/common/SerachBar';
@@ -8,9 +15,15 @@ import {fontNames} from '../../styles/typography';
 import ExamsDetailesList from '../../Components/Modules/Exams/ExamsDetailesList';
 import SelectionContainer from '../../Components/RepeatComponents/SelectionContainer';
 import PopularTextHeading from '../../Components/common/PopularTextHeading';
+import {boxShadow} from '../../styles/Mixins';
+import TextComp from '../../Components/common/TextComp';
+import {useNavigation} from '@react-navigation/native';
+import navigationString from '../../Navigation/navigationString';
 
 const Exam = () => {
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
+  const [isMenuOptionvisible, setIsMenuOptionVisible] = useState(false);
 
   return (
     <WapperContainer>
@@ -18,10 +31,52 @@ const Exam = () => {
         placeholder="Search here.."
         value={search}
         onChangeText={e => setSearch(e)}
+        menuPress={() => setIsMenuOptionVisible(!isMenuOptionvisible)}
       />
-      <PopularTextHeading text={'Popular Entrance Exams In India'} />
+      <PopularTextHeading
+        text={'Popular Entrance Exams In India'}
+        onfilterPress={() =>
+          navigation.navigate(navigationString.EXAM_FILTER_SCREEN)
+        }
+      />
       <SelectionContainer />
       <ExamsDetailesList />
+      {isMenuOptionvisible ? (
+        <View
+          style={{
+            width: spacing.WIDTH_110,
+            height: spacing.HEIGHT_65,
+            position: 'absolute',
+            top: spacing.HEIGHT_50,
+            right: spacing.WIDTH_40,
+            backgroundColor: '#fff',
+            ...boxShadow(),
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <TouchableOpacity>
+            <TextComp
+              text="Edit Profile"
+              style={{
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                fontSize: textScale(12),
+                color: '#0F0C1A',
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <TextComp
+              text="Logout"
+              style={{
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                fontSize: textScale(12),
+                color: '#0F0C1A',
+                marginTop: spacing.MARGIN_6,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </WapperContainer>
   );
 };

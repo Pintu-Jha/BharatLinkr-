@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {spacing} from '../../styles/spacing';
 import {textScale} from '../../styles/responsiveStyles';
@@ -6,12 +6,19 @@ import {fontNames} from '../../styles/typography';
 import TextComp from './TextComp';
 import ImagePath from '../../Utills/ImagePath';
 
-const PopularTextHeading = ({text = '', leftIcon = true, style = {}}) => {
+const PopularTextHeading = ({
+  text = '',
+  leftIcon = true,
+  style = {},
+  onfilterPress,
+}) => {
   return (
     <View style={{...styles.popularTextHeadingContainer, ...style}}>
       <TextComp text={text} style={styles.popularHeadingTextStyle} />
       {leftIcon ? (
-        <Image source={ImagePath.IC_SETTING} style={styles.filterIconStyle} />
+        <TouchableOpacity onPress={onfilterPress}>
+          <Image source={ImagePath.IC_SETTING} style={styles.filterIconStyle} />
+        </TouchableOpacity>
       ) : null}
     </View>
   );

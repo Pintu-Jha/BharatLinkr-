@@ -5,8 +5,11 @@ import SerachBar from '../../Components/common/SerachBar';
 import PopularTextHeading from '../../Components/common/PopularTextHeading';
 import SelectionContainer from '../../Components/RepeatComponents/SelectionContainer';
 import CollegeAllPost from '../../Components/Modules/College/CollegeAllPost';
+import navigationString from '../../Navigation/navigationString';
+import {useNavigation} from '@react-navigation/native';
 
 const Colloge = () => {
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
   return (
     <WapperContainer>
@@ -15,7 +18,12 @@ const Colloge = () => {
         value={search}
         onChangeText={e => setSearch(e)}
       />
-      <PopularTextHeading text={'Popular Colleges In India'} />
+      <PopularTextHeading
+        text={'Popular Colleges In India'}
+        onfilterPress={() =>
+          navigation.navigate(navigationString.College_FILTER_SCREEN)
+        }
+      />
       <SelectionContainer />
       <CollegeAllPost />
     </WapperContainer>

@@ -16,4 +16,7 @@ export {default as CollegeInnerPage} from '../Components/Modules/College/College
 export {default as EditProfile} from '../screens/EditProfile/EditProfile';  
 export {default as SignupScreen} from '../screens/SignupScreen/SignupScreen';  
 export {default as LoginScreen} from '../screens/LoginScreen/LoginScreen';  
-export {default as OtpVerification} from '../screens/OtpScreen/OtpVerification';  
+export {default as OtpVerification} from '../screens/OtpScreen/OtpVerification'; 
+ export {default as FilterUi} from '../Components/RepeatComponents/FilterUi'
+ export {default as ExamFilter} from '../Components/Modules/Exams/Filter'
+ export {default as CollegeFilter} from '../Components/Modules/College/Filter'

@@ -104,9 +104,12 @@ const SerachBar = ({
             <Image
               style={{
                 ...styles.iconStyle,
-                ...Icon3,
+                ...(Icon3 = {
+                  width: spacing.WIDTH_30,
+                  height: spacing.HEIGHT_30,
+                }),
               }}
-              source={ImagePath.IC_MENU}
+              source={source3 ? source3 : ImagePath.IC_MENU}
             />
           </TouchableOpacity>
         ) : null}
