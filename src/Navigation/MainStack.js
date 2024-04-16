@@ -47,6 +47,11 @@ export default function (Stack) {
         component={Screen.CollegeFilter}
         options={{headerShown: false}}
       />
+        <Stack.Screen
+        name={navigationString.notification_SCREEN}
+        component={Screen.Notification}
+        options={{headerShown: false}}
+      />
     </>
   );
 }

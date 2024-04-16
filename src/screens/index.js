@@ -20,3 +20,4 @@ export {default as OtpVerification} from '../screens/OtpScreen/OtpVerification';
  export {default as FilterUi} from '../Components/RepeatComponents/FilterUi'
  export {default as ExamFilter} from '../Components/Modules/Exams/Filter'
  export {default as CollegeFilter} from '../Components/Modules/College/Filter'
+ export {default as Notification} from '../screens/Notification/Notification'

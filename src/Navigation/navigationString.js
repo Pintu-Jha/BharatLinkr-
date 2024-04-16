@@ -22,5 +22,6 @@ export default {
   OTP_SCREEN:'optScreen',
   FilterUi:'filterUi',
   EXAM_FILTER_SCREEN:'examFilterScreen',
-  College_FILTER_SCREEN:'collegeFilterScreen'
+  College_FILTER_SCREEN:'collegeFilterScreen',
+  notification_SCREEN:'notificationScreen',
 };

@@ -14,6 +14,8 @@ import {textScale} from '../../styles/responsiveStyles';
 import ImagePath from '../../Utills/ImagePath';
 import {fontNames} from '../../styles/typography';
 import {boxShadow} from '../../styles/Mixins';
+import {useNavigation} from '@react-navigation/native';
+import navigationString from '../../Navigation/navigationString';
 
 // create a component
 const SerachBar = ({
@@ -33,7 +35,7 @@ const SerachBar = ({
   menuPress,
   ...props
 }) => {
-  // console.log(source3);
+  const navigation = useNavigation();
 
   return (
     <View
@@ -81,12 +83,13 @@ const SerachBar = ({
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
-          // flex: 0.2,
-          // flex:1,
           marginLeft: spacing.MARGIN_10,
         }}>
         {rightNotificationImage ? (
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(navigationString.notification_SCREEN)
+            }>
             <Image
               style={styles.iconStyle}
               source={ImagePath.IC_NOTIFICATION}
