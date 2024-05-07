@@ -24,4 +24,5 @@ export default {
   EXAM_FILTER_SCREEN:'examFilterScreen',
   College_FILTER_SCREEN:'collegeFilterScreen',
   notification_SCREEN:'notificationScreen',
+  Seacrch_Bar_SCREEN:'searchBarScreen',
 };

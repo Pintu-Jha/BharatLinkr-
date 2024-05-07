@@ -52,6 +52,11 @@ export default function (Stack) {
         component={Screen.Notification}
         options={{headerShown: false}}
       />
+        <Stack.Screen
+        name={navigationString.Seacrch_Bar_SCREEN}
+        component={Screen.HomeSearchBar}
+        options={{headerShown: false}}
+      />
     </>
   );
 }

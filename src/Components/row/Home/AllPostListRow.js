@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -26,46 +25,60 @@ const AllPostListRow = ({item, index, isSelected}) => {
       <View
         style={{
           flexDirection: 'row',
-          // marginTop: spacing.MARGIN_8,
-          justifyContent: 'space-around',
-          alignItems: 'center',
+          justifyContent: 'space-between',
         }}>
-        <Image
-          source={ImagePath.Other_PROFILE}
-          style={{marginLeft: spacing.MARGIN_16, resizeMode: 'contain'}}
-        />
-        <View>
-          <View style={styles.postUserNameDetailsContainer}>
-            <View style={{...commonStyle.flexRow, alignItems: 'center'}}>
-              <TextComp
-                text={item.item.userName}
-                style={styles.userNameTextStyle}
-              />
-              <TextComp
-                text={item.item.hiring}
-                style={styles.hiringTextStyle}
-              />
-            </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <Image
+            source={ImagePath.Other_PROFILE}
+            style={{marginLeft: spacing.MARGIN_16, resizeMode: 'contain'}}
+          />
+          <View
+            style={{
+              maxWidth: spacing.WIDTH_344,
+              width: spacing.WIDTH_230,
+              marginLeft: spacing.MARGIN_8,
+            }}>
+            <View style={styles.postUserNameDetailsContainer}>
+              <View style={{...commonStyle.flexRow, alignItems: 'center'}}>
+                <TextComp
+                  text={item.item.userName}
+                  style={styles.userNameTextStyle}
+                />
+                <TextComp
+                  text={item.item.hiring}
+                  style={styles.hiringTextStyle}
+                />
+              </View>
 
-            <View style={styles.postTimeContainer}>
-              <Image source={ImagePath.IC_HOURS} style={styles.timeIconStyle} />
-              <TextComp text={'2Hrs ago'} style={styles.timeTextStyle} />
+              <View style={styles.postTimeContainer}>
+                <Image
+                  source={ImagePath.IC_HOURS}
+                  style={styles.timeIconStyle}
+                />
+                <TextComp text={'2Hrs ago'} style={styles.timeTextStyle} />
+              </View>
             </View>
-          </View>
-          <View style={styles.positionRequiredTextContainer}>
-            <Image
-              source={ImagePath.IC_STUDENT}
-              style={styles.graduationStudentIconStyle}
-            />
-            <TextComp
-              text={item.item.profession}
-              style={styles.professionTextStyle}
-            />
-            <View style={styles.seperatorLine} />
-            <TextComp
-              text={item.item.collegeName}
-              style={styles.collegeNameTextStyle}
-            />
+            <View style={styles.positionRequiredTextContainer}>
+              <Image
+                source={ImagePath.IC_STUDENT}
+                style={styles.graduationStudentIconStyle}
+              />
+              <TextComp
+                text={item.item.profession}
+                style={styles.professionTextStyle}
+              />
+              <View style={styles.seperatorLine} />
+              <TextComp
+                text={item.item.collegeName}
+                style={styles.collegeNameTextStyle}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              />
+            </View>
           </View>
         </View>
         <TouchableOpacity onPress={handleOptionVisible}>
@@ -86,22 +99,16 @@ const AllPostListRow = ({item, index, isSelected}) => {
       </View>
       <View style={styles.horizontalLineStyle} />
       <View style={styles.socialMeidalContainer}>
-        {/* <View style={{flexDirection: 'row', alignItems: 'center',borderWidth:1}}> */}
-        {/* <View style={{alignItems: 'center', borderWidth: 1}}> */}
         <Image
           source={ImagePath.IC_LIKE_CLLAPING}
           style={styles.socialMeidaIconStyle}
         />
-        {/* <TextComp text={'Admired'} style={styles.admiredTextStyle} /> */}
-        {/* </View> */}
         <TextComp text="125" style={styles.socialMediaIconsCountNumberStyle} />
         <View style={styles.commentAlignMentContainer}>
           <Image
             source={ImagePath.IC_COMMENTS}
             style={{
               ...styles.socialMeidaIconStyle,
-
-              // marginBottom: spacing.MARGIN_8,
             }}
           />
           <TextComp
@@ -139,6 +146,7 @@ const AllPostListRow = ({item, index, isSelected}) => {
             placeholder="Write an opinion..."
             placeholderTextColor={'#0F0C1A'}
             style={styles.textInputTextContainer}
+            multiline={true}
           />
           <Image
             source={ImagePath.IC_SHARE_POST}
@@ -177,7 +185,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: spacing.MARGIN_12,
     borderRadius: spacing.RADIUS_4,
-    marginHorizontal: spacing.MARGIN_2,
+    marginHorizontal: spacing.MARGIN_12,
     paddingVertical: spacing.PADDING_8,
     ...boxShadow(),
   },
@@ -191,7 +199,6 @@ const styles = StyleSheet.create({
   postUserNameDetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   userNameTextStyle: {
     color: '#0F0C1A',
@@ -228,12 +235,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
+    // borderWidth:1
   },
   graduationStudentIconStyle: {
-    width: spacing.WIDTH_14,
-    height: spacing.HEIGHT_14,
+    width: spacing.WIDTH_10,
+    height: spacing.HEIGHT_10,
     resizeMode: 'contain',
-    marginHorizontal: spacing.MARGIN_4,
+    marginRight: spacing.MARGIN_4,
     tintColor: '#ABABAB',
   },
   professionTextStyle: {
@@ -254,6 +263,9 @@ const styles = StyleSheet.create({
     opacity: 0.76,
     fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
     fontSize: textScale(10),
+    overflow: 'hidden',
+    flex: 1,
+    maxWidth: '100%',
   },
   menuIconStyle: {
     tintColor: '#6753a3',
@@ -269,7 +281,7 @@ const styles = StyleSheet.create({
   requiredTaskDescriptionTextStyle: {
     color: '#484651',
     fontFamily: fontNames.POPPINS_FONT_FAMILY_REGULAR,
-    fontSize: textScale(11),
+    fontSize: textScale(12),
     opacity: 1,
   },
   socialMeidalContainer: {

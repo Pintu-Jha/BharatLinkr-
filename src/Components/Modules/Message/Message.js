@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
   inputTextStyle: {
     color: '#0F0C1AD6',
     fontSize: textScale(12),
+    flex:1
   },
   massegeContainer: {
     borderTopRightRadius: spacing.RADIUS_50,

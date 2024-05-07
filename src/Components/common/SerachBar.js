@@ -30,6 +30,7 @@ const SerachBar = ({
   textStyle = {},
   source3,
   Icon3 = {},
+  searchBarPress = {},
   placeholderTextColor = '#0F0C1A',
   msgOnpress,
   menuPress,
@@ -46,7 +47,6 @@ const SerachBar = ({
         height: spacing.HEIGHT_70,
         paddingHorizontal: spacing.PADDING_20,
         ...boxShadow(),
-        // flex:1
       }}>
       <View style={{alignItems: 'center'}}>
         <Image
@@ -58,13 +58,13 @@ const SerachBar = ({
           }}
         />
       </View>
-      <View
+      <TouchableOpacity
         style={{
           ...styles.inputStyle,
           ...inputStyle,
-          // flex: 0.55,
           flex: 1,
-        }}>
+        }}
+        onPress={searchBarPress}>
         <TextInput
           style={{
             ...styles.textStyle,
@@ -77,7 +77,7 @@ const SerachBar = ({
           {...props}
         />
         <Image source={ImagePath.IC_SEARCH} style={styles.searchImage} />
-      </View>
+      </TouchableOpacity>
       <View
         style={{
           flexDirection: 'row',
@@ -123,12 +123,10 @@ const SerachBar = ({
 
 const styles = StyleSheet.create({
   inputStyle: {
-    // height: spacing.HEIGHT_44,
     borderRadius: spacing.RADIUS_8,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.PADDING_12,
-    marginVertical: spacing.MARGIN_8,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#0F0C1AD6',

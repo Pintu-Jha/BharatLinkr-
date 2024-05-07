@@ -9,13 +9,53 @@ import {textScale} from '../../styles/responsiveStyles';
 import LableWithInput from '../../Components/common/LableWithInput';
 import BottonComp from '../../Components/common/BottonComp';
 import navigationString from '../../Navigation/navigationString';
-import ImagePath from '../../Utills/ImagePath';
+import validator from '../../Utills/validations';
 import AnimatedComponentToggale from '../../Components/common/AnimatedComponentToggale';
+import ModalComp from '../../Components/common/ModalComp';
+import {showError} from '../../Utills/HelperFuncation';
+import {userLogin} from '../../Redux/actions/auth';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPawword] = useState('');
   const [selectUserOption, setSelectUserOption] = useState('');
+  const [disclaimer, setDisclaimer] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+
+  const isValidData = () => {
+    const error = validator({
+      email,
+      password,
+    });
+    if (error) {
+      showError(error);
+      return false;
+    }
+    return true;
+  };
+
+  const handleAccept = async () => {
+    const checkValid = isValidData();
+    if (checkValid) {
+      setLoading(true);
+      setDisclaimer(false);
+      try {
+        await userLogin({email, password});
+        setLoading(false);
+      } catch (error) {
+        showError(error?.message);
+        setLoading(false);
+      }
+    }
+  };
+  const handleLogin = async () => {
+    setDisclaimer(true);
+  };
+  const handleDecline = () => {
+    console.log('click decline btn>>');
+    setDisclaimer(false);
+  };
+
   return (
     <WapperContainer>
       <View style={{flex: 1}}>
@@ -43,61 +83,22 @@ const LoginScreen = ({navigation}) => {
           <LableWithInput
             placeholder="Enter Password"
             lableText="Password"
-            // inputMainContainer={{flex: 0}}
             value={password}
             onChangeText={e => setPawword(e)}
           />
-          <TextComp
-            text={'Select Login Type'}
-            style={styles.loginTypeTextStye}
-          />
-          <View style={styles.tabContainer}>
-            <AnimatedComponentToggale
-              initialHeight={spacing.FULL_HEIGHT/4}
-              AnimationBtnContainer={{paddingRight: spacing.PADDING_28}}
-              tabName={selectUserOption}>
-             <View style={{alignItems:"center"}}>
-             <TextComp
-                text="Student"
-                style={styles.userTypesTextStyle}
-                onPress={() => setSelectUserOption('Student')}
-              />
-              <TextComp
-                text="College"
-                style={styles.userTypesTextStyle}
-                onPress={() => setSelectUserOption('College')}
-              />
-              <TextComp
-                text="Campus Ambassadors"
-                style={styles.userTypesTextStyle}
-                onPress={() => setSelectUserOption('Campus Ambassadors')}
-              />
-              <TextComp
-                text="School or college authorities"
-                style={styles.userTypesTextStyle}
-                onPress={() =>
-                  setSelectUserOption('School or college authorities')
-                }
-              />
-              <TextComp
-                text="Others"
-                style={styles.userTypesTextStyle}
-                onPress={() => setSelectUserOption('Others')}
-              />
-             </View>
-            </AnimatedComponentToggale>
-          </View>
-
           <TextComp text={'Forgot Password?'} style={styles.forgotText} />
           <BottonComp
             text="Login"
+            isLoading={isLoading}
             style={styles.btnStyle}
             textStyle={styles.loginTextStyle}
+            onPress={() => handleLogin()}
           />
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
+              justifyContent: 'center',
             }}>
             <TextComp
               text={`Don't have an account?`}
@@ -119,6 +120,95 @@ const LoginScreen = ({navigation}) => {
           </View>
         </View>
       </View>
+      <ModalComp
+        isVisible={disclaimer}
+        onBackdropPress={() => setDisclaimer(false)}
+        backdropOpacity={0.7}>
+        <View
+          style={{
+            backgroundColor: '#fff',
+            minHeight: spacing.FULL_HEIGHT / 3.5,
+            borderRadius: spacing.RADIUS_12,
+            padding: spacing.PADDING_16,
+            marginHorizontal: spacing.MARGIN_12,
+            elevation: 4,
+          }}>
+          <TextComp
+            text="Disclaimer"
+            style={{
+              color: '#463196',
+              fontFamily: fontNames.POPPINS_FONT_FAMILY_SEMI_BOLD,
+              fontSize: textScale(20),
+              opacity: 1,
+              alignSelf: 'center',
+            }}
+          />
+          <View
+            style={{
+              marginVertical: spacing.MARGIN_16,
+              marginLeft: spacing.MARGIN_16,
+            }}>
+            <TextComp
+              text="1- Lorem ipsum dolar sit amet"
+              style={{
+                fontSize: textScale(14),
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                color: '#0F0C1A',
+                opacity: 1,
+              }}
+            />
+            <TextComp
+              text="1- Lorem ipsum dolar sit amet"
+              style={{
+                fontSize: textScale(14),
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                color: '#0F0C1A',
+                opacity: 1,
+                marginTop: spacing.MARGIN_10,
+              }}
+            />
+            <TextComp
+              text="1- Lorem ipsum dolar sit amet"
+              style={{
+                fontSize: textScale(14),
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                color: '#0F0C1A',
+                opacity: 1,
+                marginTop: spacing.MARGIN_10,
+              }}
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+            }}>
+            <BottonComp
+              text="Decline"
+              style={{
+                width: spacing.WIDTH_110,
+                height: spacing.HEIGHT_40,
+                backgroundColor: '#4631961F',
+                borderColor: '',
+              }}
+              textStyle={{color: '#6553A7'}}
+              onPress={() => handleDecline()}
+            />
+            <BottonComp
+              text="I Accept"
+              style={{
+                width: spacing.WIDTH_110,
+                height: spacing.HEIGHT_40,
+                backgroundColor: '#463196',
+                borderColor: '#463196',
+              }}
+              textStyle={{color: '#FCFCFC'}}
+              onPress={() => handleAccept()}
+            />
+          </View>
+        </View>
+      </ModalComp>
     </WapperContainer>
   );
 };
@@ -134,7 +224,7 @@ const styles = StyleSheet.create({
   },
   loginContainer: {
     width: spacing.FULL_WIDTH / 1.2,
-    height: spacing.FULL_HEIGHT / 1.7,
+    height: spacing.FULL_HEIGHT / 2,
     backgroundColor: '#FCFCFC',
     ...boxShadow(),
     alignSelf: 'center',
@@ -164,7 +254,7 @@ const styles = StyleSheet.create({
     opacity: 1,
     alignSelf: 'flex-end',
     textDecorationLine: 'underline',
-    marginTop: spacing.MARGIN_60,
+    marginTop: spacing.MARGIN_30,
   },
   btnStyle: {
     width: spacing.WIDTH_116,
@@ -181,7 +271,7 @@ const styles = StyleSheet.create({
   },
   createAccountTextStyle: {
     fontFamily: fontNames.POPPINS_FONT_FAMILY_REGULAR,
-    fontSize: textScale(13),
+    fontSize: textScale(14),
     opacity: 1,
     marginTop: spacing.MARGIN_30,
   },
@@ -200,7 +290,7 @@ const styles = StyleSheet.create({
     borderRadius: spacing.RADIUS_8,
     flex: 1,
     position: 'absolute',
-    top: spacing.HEIGHT_200,
+    top: spacing.HEIGHT_192,
     alignSelf: 'center',
     width: spacing.FULL_WIDTH / 1.35,
     zIndex: 1,

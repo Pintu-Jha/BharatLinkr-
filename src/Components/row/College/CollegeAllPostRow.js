@@ -9,101 +9,104 @@ import TextComp from '../../../Components/common/TextComp';
 import {boxShadow} from '../../../styles/Mixins';
 import navigationString from '../../../Navigation/navigationString';
 import {useNavigation} from '@react-navigation/native';
+import Share from 'react-native-share';
 
 const CollegeAllPostRow = ({item}) => {
   const navigation = useNavigation();
   const [isOptionVisible, setIsOptionVisible] = useState(false);
-  // console.log(item.heading);
+  const shareOpenModal = async () => {
+    const data = {
+      message: 'hii',
+    };
+    try {
+      const shareRes = await Share.open(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.mainContainer}>
+      <View
+        style={{...styles.courseContainer, backgroundColor: item.item.color}}
+      />
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <View
-          style={{...styles.courseContainer, backgroundColor: item.item.color}}
-        />
-        <View
+        <TouchableOpacity
           style={{
-            marginTop: spacing.MARGIN_14,
-            width: spacing.WIDTH_275,
-          }}>
-          <TouchableOpacity
+            maxWidth: spacing.FULL_WIDTH / 1.5,
+            width: spacing.FULL_WIDTH / 1.6,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+          onPress={() =>
+            navigation.navigate(navigationString.COLLEGE_INNER_PAGE, {
+              college: item.item.heading,
+              address: item.item.address,
+              BOARD: item.item.UGC,
+            })
+          }>
+          <Image
+            source={ImagePath.COLLEGE_IMAGE}
             style={{
-              ...commonStyle.flexRow,
-              alignItems: 'center',
-              justifyContent: 'space-evenly',
+              width: spacing.WIDTH_60,
+              height: spacing.HEIGHT_60,
+              resizeMode: 'contain',
             }}
-            onPress={() =>
-              navigation.navigate(navigationString.COLLEGE_INNER_PAGE, {
-                college: item.item.heading,
-                address: item.item.address,
-                BOARD:item.item.UGC
-              })
-            }>
-            <Image
-              source={ImagePath.COLLEGE_IMAGE}
-              style={{
-                width: spacing.WIDTH_60,
-                height: spacing.HEIGHT_60,
-                resizeMode: 'contain',
-              }}
-            />
-            <TextComp
-              text={item.item.heading}
-              style={styles.courseHeadingStyle}
-            />
-          </TouchableOpacity>
-          <View
-            style={{
-              ...commonStyle.flexRow,
-              ...commonStyle.justifyALignCenter,
-              marginVertical: spacing.MARGIN_10,
-            }}>
-            <View
-              style={{
-                ...commonStyle.flexRow,
-                alignItems: 'center',
-              }}>
-              <Image
-                source={ImagePath.IC_LOCATION}
-                style={{
-                  width: spacing.WIDTH_16,
-                  height: spacing.HEIGHT_16,
-                  marginHorizontal: spacing.MARGIN_6,
-                  resizeMode: 'contain',
-                }}
-              />
-              <TextComp
-                text={item.item.address}
-                style={styles.locationTextStyle}
-              />
-            </View>
-            <View
-              style={{
-                ...commonStyle.flexRow,
-                ...commonStyle.justifyALignCenter,
-                alignItems: 'center',
-                marginHorizontal: spacing.MARGIN_10,
-              }}>
-              <Image
-                source={ImagePath.IC_BOOK}
-                style={{
-                  width: spacing.WIDTH_16,
-                  height: spacing.HEIGHT_16,
-                  marginHorizontal: spacing.MARGIN_6,
-                  resizeMode: 'contain',
-                }}
-              />
-              <TextComp text={item.item.UGC} style={styles.locationTextStyle} />
-            </View>
-          </View>
-        </View>
+          />
+          <TextComp
+            text={item.item.heading}
+            style={styles.courseHeadingStyle}
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => setIsOptionVisible(!isOptionVisible)}>
           <Image source={ImagePath.IC_MENU} style={styles.menuIconStyle} />
         </TouchableOpacity>
       </View>
+      <View
+        style={{
+          ...commonStyle.flexRow,
+          ...commonStyle.justifyALignCenter,
+          marginVertical: spacing.MARGIN_10,
+        }}>
+        <View
+          style={{
+            ...commonStyle.flexRow,
+            alignItems: 'center',
+          }}>
+          <Image
+            source={ImagePath.IC_LOCATION}
+            style={{
+              width: spacing.WIDTH_16,
+              height: spacing.HEIGHT_16,
+              marginHorizontal: spacing.MARGIN_6,
+              resizeMode: 'contain',
+            }}
+          />
+          <TextComp text={item.item.address} style={styles.locationTextStyle} />
+        </View>
+        <View
+          style={{
+            ...commonStyle.flexRow,
+            ...commonStyle.justifyALignCenter,
+            alignItems: 'center',
+            marginHorizontal: spacing.MARGIN_10,
+          }}>
+          <Image
+            source={ImagePath.IC_BOOK}
+            style={{
+              width: spacing.WIDTH_16,
+              height: spacing.HEIGHT_16,
+              marginHorizontal: spacing.MARGIN_6,
+              resizeMode: 'contain',
+            }}
+          />
+          <TextComp text={item.item.UGC} style={styles.locationTextStyle} />
+        </View>
+      </View>
+
       <View style={styles.horizontalLineStyle} />
       <View style={styles.averageTextContainer}>
         <View>
@@ -155,14 +158,16 @@ const CollegeAllPostRow = ({item}) => {
           <TextComp text={'12'} style={styles.socialCountTextStyle} />
         </View>
         <View style={styles.sepretorLine} />
-        <View
-          style={{...commonStyle.flexRow, ...commonStyle.justifyALignCenter}}>
+        <TouchableOpacity
+          style={{...commonStyle.flexRow, ...commonStyle.justifyALignCenter}}
+          activeOpacity={0.8}
+          onPress={shareOpenModal}>
           <Image
             source={ImagePath.IC_SHARE}
             style={styles.socialMediaIconStyle}
           />
           <TextComp text={'305'} style={styles.socialCountTextStyle} />
-        </View>
+        </TouchableOpacity>
         <View style={styles.sepretorLine} />
         <View
           style={{...commonStyle.flexRow, ...commonStyle.justifyALignCenter}}>
@@ -247,21 +252,24 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: spacing.MARGIN_16,
     borderRadius: spacing.RADIUS_4,
-    flex:1
+    maxWidth: spacing.FULL_WIDTH,
+    width: '90%',
   },
   courseContainer: {
     width: spacing.WIDTH_4,
     height: spacing.HEIGHT_80,
     borderRadius: spacing.RADIUS_6,
     marginRight: spacing.MARGIN_10,
+    position: 'absolute',
   },
   courseHeadingStyle: {
-    width: spacing.WIDTH_250,
     fontSize: textScale(13),
     color: '#0F0C1A',
-    textAlign: 'center',
     opacity: 9,
     fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+    overflow: 'hidden',
+    flexWrap: 'wrap',
+    textAlign:"center"
   },
   courseDescriptionStyle: {
     fontSize: textScale(12),

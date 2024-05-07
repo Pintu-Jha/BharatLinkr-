@@ -180,6 +180,8 @@ export const spacing = {
   WIDTH_156: scale(156),
   WIDTH_160: scale(160),
   WIDTH_164: scale(164),
+  WIDTH_170: scale(170),
+  WIDTH_176: scale(176),
   WIDTH_184: scale(184),
   WIDTH_196: scale(196),
   WIDTH_200: scale(200),

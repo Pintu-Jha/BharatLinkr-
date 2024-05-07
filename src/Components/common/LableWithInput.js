@@ -64,6 +64,7 @@ export default LableWithInput;
 
 const styles = StyleSheet.create({
   inputStyle: {
+    height:spacing.HEIGHT_50,
     borderRadius: spacing.RADIUS_6,
     borderWidth: 1,
     borderColor: '#0d0d0d0d',
@@ -74,11 +75,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   textStyle: {
-    fontSize: textScale(11),
+    fontSize: textScale(14),
     flex: 1,
-    color: '#C8C1DF',
+    color: '#0F0C1A',
     fontFamily: fontNames.POPPINS_FONT_FAMILY_REGULAR,
-    padding: spacing.PADDING_10,
+    padding: 0,
+    paddingLeft:spacing.PADDING_10
   },
   iconstyle: {
     width: spacing.WIDTH_20,

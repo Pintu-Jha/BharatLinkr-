@@ -1,5 +1,5 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
 import { spacing } from '../../../styles/spacing'
 import { fontNames } from '../../../styles/typography'
 import { textScale } from '../../../styles/responsiveStyles'
@@ -9,6 +9,7 @@ import ImagePath from '../../../Utills/ImagePath'
 import { boxShadow } from '../../../styles/Mixins'
 
 const CourseDetailes = ({item,index}) => {
+  const [isOptionSelect,setIsOptionSelect] = useState(false)
   return (
     <View style={styles.mainContainer}>
         <View
@@ -91,10 +92,59 @@ const CourseDetailes = ({item,index}) => {
               </View>
             </View>
           </View>
-          <View>
+          <TouchableOpacity onPress={()=>setIsOptionSelect(!isOptionSelect)}>
             <Image source={ImagePath.IC_MENU} style={styles.menuIconStyle} />
-          </View>
+          </TouchableOpacity>
         </View>
+        {isOptionSelect ? (
+        <View
+          style={{
+            backgroundColor: '#fff',
+            elevation: 4,
+            position: 'absolute',
+            top: spacing.HEIGHT_38,
+            right: spacing.WIDTH_18,
+            alignContent: 'center',
+            justifyContent: 'center',
+            padding:spacing.PADDING_10
+          }}>
+          <TouchableOpacity>
+            <TextComp
+              text="OverView"
+              style={{
+                textAlign: 'center',
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                fontSize: textScale(12),
+                opacity:.76
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <TextComp
+              text="Entrance Exam"
+              style={{
+                textAlign: 'center',
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                fontSize: textScale(12),
+                marginTop:spacing.MARGIN_8,
+                opacity:.76
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <TextComp
+              text="Carrer Options"
+              style={{
+                textAlign: 'center',
+                fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                fontSize: textScale(12),
+                marginTop:spacing.MARGIN_8,
+                opacity:.76
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : null}
       </View>
   )
 }

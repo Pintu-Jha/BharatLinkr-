@@ -73,7 +73,7 @@ function Practice() {
           animation: 'slide_from_right',
           animationTypeForReplace: 'push',
           // animationDuration:.2
-        }} >
+        }}>
         <Stack.Screen
           name={navigationString.PRACTICE_SCREEN}
           component={Screen.Practice}
@@ -113,16 +113,12 @@ function BottomTabs({}) {
             tabBarShowLabel: false,
             tabBarActiveTintColor: activeTabColor,
             tabBarInactiveTintColor: inActiveTabColor,
-            
+
             tabBarStyle: {
               backgroundColor: tabBarColor,
               paddingBottom: 0,
-              height: spacing.HEIGHT_68,
-              // borderTopWidth: selectedTab === 0 ? 4 : 0,
-              // borderTopColor: 'red',
+              height: spacing.HEIGHT_64,
             },
-            tabBarLabelStyle: {alignSelf: 'center'},
-            tabBarAllowFontScaling: true,
             headerShown: false,
           }}>
           {tabData.map((item, index) => {
@@ -187,13 +183,14 @@ const styles = StyleSheet.create({
     width: spacing.HEIGHT_24,
     tintColor: '#C8C1DF',
     alignSelf: 'center',
+    resizeMode:'contain'
   },
   focusedIconContainer: {
     borderTopWidth: 5,
     borderTopColor: '#6553A7',
   },
   label: {
-    fontSize: textScale(11),
+    fontSize: textScale(9),
     color: '#C8C1DF',
     opacity: 9,
     alignSelf: 'center',

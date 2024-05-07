@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -59,6 +60,7 @@ const Filter = () => {
 
   return (
     <WapperContainer>
+    <View style={{flex:1}}>
       <View style={styles.headerContainer}>
         <TextComp text={'Filters'} style={styles.headerTextStyle} />
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -81,7 +83,7 @@ const Filter = () => {
                         item.id == categoryOptionId ? '#FCFCFC' : '#EFEFEF',
                     },
                   ]}
-                  key={item.id}
+                  key={item.id.toString()}
                   onPress={() => setCategoryOptionId(item.id)}>
                   <TextComp text={item.name} style={styles.categoryTextStyle} />
                 </TouchableOpacity>
@@ -91,12 +93,14 @@ const Filter = () => {
         </View>
         <View style={styles.subCategoryContainer}>
           <View style={styles.searchBar}>
-            <TextComp
-              text="Search here..."
+            <TextInput
+              placeholder="Search here..."
+              placeholderTextColor={'#0000000F'}
               style={{
-                color: '#0000000F',
+                color: '#0F0C1A',
                 opacity: 1,
                 fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
+                flex:1
               }}
             />
             <Image
@@ -121,6 +125,7 @@ const Filter = () => {
           style={styles.btnStyle}
           textStyle={{color: '#fff'}}
         />
+      </View>
       </View>
     </WapperContainer>
   );
@@ -198,7 +203,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderColor: '#CCCCCC78',
     opacity: 1,
-    ...boxShadow('#C8C1DF'),
     borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',

@@ -1,24 +1,18 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 const authSlice = createSlice({
-  name: 'userData',
-  initialState: {
-    userData: null,
-    // loginData:null,
-    isUserLoggedIn: false
-  },
-  reducers: {
-    signupData: (state, action) => {
-      state.userData = action.payload;
-      // AsyncStorage.setItem('user', JSON.stringify(action.payload))
+    name: 'userData',
+    initialState: {
+      userData: {},
     },
-    loginData: (state, action) => {
-      state.userData = action.payload;
-      state.isUserLoggedIn = true
-      }
-    }
-})
-
-export const {signupData,loginData} = authSlice.actions;
-
-export default authSlice.reducer;
+    reducers: {
+      saveUserData: (state, action) => {
+       state.userData = action.payload;
+      },
+    },
+    
+  })
+  
+  export const { saveUserData } = authSlice.actions
+  
+  export default authSlice.reducer

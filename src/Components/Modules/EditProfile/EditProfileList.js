@@ -103,5 +103,6 @@ const styles = StyleSheet.create({
     fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
     color: '#463196',
     opacity: 0.76,
+    textTransform:'uppercase'
   },
 });

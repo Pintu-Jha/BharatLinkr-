@@ -20,7 +20,7 @@ const Course = () => {
         value={search}
         onChangeText={e => setSearch(e)}
       />
-      <PopularTextHeading text={'Popular Courses In India'} />
+      <PopularTextHeading text={'Popular Courses In India'} leftIcon={false} />
       <SelectionContainer />
       <CourseDetailsList />
     </WapperContainer>

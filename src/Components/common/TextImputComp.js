@@ -36,6 +36,7 @@ const TextImputComp = ({
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
         {...props}
+        
       />
 
       {!!appIcons ? (

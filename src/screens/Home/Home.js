@@ -46,6 +46,11 @@ const Home = () => {
           onChangeText={e => setSearch(e)}
           msgOnpress={() => navigation.navigate(navigationString.TOP_TAB_BAR)}
           menuPress={() => setIsVisible(!isVisible)}
+          searchBarPress={() =>
+            navigation.navigate(navigationString.Seacrch_Bar_SCREEN)
+          }
+          editable={false}
+          selectTextOnFocus={false}
         />
         <HomeStatusBar />
         <PostInputContainer />

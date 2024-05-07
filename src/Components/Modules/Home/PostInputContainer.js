@@ -16,6 +16,7 @@ const PostInputContainer = () => {
     placeholderTextColor="#484651"
     value={postComment}
     onChangeText={e => setPostComments(e)}
+    multiline={true}
   />
   )
 }
@@ -25,7 +26,7 @@ export default PostInputContainer
 const styles = StyleSheet.create({
     postUploadeStyle: {
         color: '#484651',
-        fontSize: textScale(10),
+        fontSize: textScale(11),
         fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
         opacity: 0.76,
         paddingHorizontal: spacing.PADDING_6,

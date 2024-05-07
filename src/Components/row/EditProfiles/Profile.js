@@ -150,7 +150,7 @@ const Profile = () => {
     <VirtualizedView>
       <View style={styles.tabContainer}>
         <AnimatedComponentToggale
-          initialHeight={spacing.FULL_HEIGHT * 1.12}
+          initialHeight={spacing.FULL_HEIGHT * 1.2}
           tabName="Basic Details">
           <Image source={ImagePath.COVER_PHOTO} style={styles.coverImgStyle} />
           <View
@@ -271,7 +271,7 @@ const Profile = () => {
       </View>
       <View style={styles.tabContainer}>
         <AnimatedComponentToggale
-          initialHeight={spacing.FULL_HEIGHT / 2.22}
+          initialHeight={spacing.FULL_HEIGHT / 2}
           tabName="Academic Details">
           <LableWithInput
             lableText="Degree And Field of Study"
@@ -429,12 +429,11 @@ const Profile = () => {
             inputStyle={styles.inputStyle}
             placeholder="Enter Name"
           />
-          <View style={{marginBottom: spacing.MARGIN_12}} />
         </AnimatedComponentToggale>
       </View>
       <View style={styles.tabContainer}>
         <AnimatedComponentToggale
-          initialHeight={spacing.FULL_HEIGHT / 2}
+          initialHeight={spacing.FULL_HEIGHT / 1.8}
           tabName="Work Details">
           <LableWithInput
             lableText="Title"
@@ -540,7 +539,7 @@ const Profile = () => {
       </View>
       <View style={styles.tabContainer}>
         <AnimatedComponentToggale
-          initialHeight={spacing.FULL_HEIGHT / 1.6}
+          initialHeight={spacing.FULL_HEIGHT / 1.45}
           tabName="PROJECT DETAILS">
           <LableWithInput
             lableText="Project Name"
@@ -686,8 +685,6 @@ const Profile = () => {
       {isGenderSelect ? (
         <View
           style={{
-            width: spacing.FULL_WIDTH / 4,
-            height: spacing.HEIGHT_90,
             alignSelf: 'center',
             ...boxShadow(),
             backgroundColor: '#fff',
@@ -875,8 +872,6 @@ const styles = StyleSheet.create({
     fontSize: textScale(14),
   },
   languageLevelModalContainer: {
-    height: spacing.HEIGHT_200,
-    width: spacing.WIDTH_250,
     backgroundColor: '#fff',
     position: 'absolute',
     bottom: spacing.HEIGHT_150,

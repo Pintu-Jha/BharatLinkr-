@@ -12,7 +12,6 @@ const RequestLinkDetails = ({item, index}) => {
     <View
       style={{
         backgroundColor: '#FFFFFF',
-        height: spacing.HEIGHT_80,
         marginHorizontal: spacing.MARGIN_16,
         marginVertical: spacing.MARGIN_8,
         borderRadius: spacing.RADIUS_8,

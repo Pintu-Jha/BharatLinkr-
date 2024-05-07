@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {spacing} from '../../styles/spacing';
 import {textScale} from '../../styles/responsiveStyles';
@@ -13,6 +13,7 @@ const BottonComp = ({
   source = {},
   rightImg = false,
   textStyle = {},
+  isLoading=false
 }) => {
   return (
     <TouchableOpacity
@@ -22,13 +23,17 @@ const BottonComp = ({
       {!!leftImg ? (
         <Image source={source} style={{...styles.IconStyle, ...IconStyle}} />
       ) : null}
-      <Text
-        style={{
-          ...styles.textStyle,
-          ...textStyle,
-        }}>
-        {text}
-      </Text>
+      {isLoading ? (
+        <ActivityIndicator size={'small'} color={'white'} />
+      ) : (
+        <Text
+          style={{
+            ...styles.textStyle,
+            ...textStyle,
+          }}>
+          {text}
+        </Text>
+      )}
       {!!rightImg ? (
         <Image source={source} style={{...styles.IconStyle, ...IconStyle}} />
       ) : null}

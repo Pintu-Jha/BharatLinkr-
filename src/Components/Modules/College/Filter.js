@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -228,10 +229,11 @@ const Filter = () => {
         </View>
         <View style={styles.subCategoryContainer}>
           <View style={styles.searchBar}>
-            <TextComp
-              text="Search here..."
+            <TextInput
+              placeholder="Search here..."
+              placeholderTextColor={'#0000000F'}
               style={{
-                color: '#0000000F',
+                color: '#0F0C1A',
                 opacity: 1,
                 fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
               }}

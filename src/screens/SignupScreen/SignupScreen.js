@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     ...boxShadow('#000d0d', {height: 0, width: 0}, 1, 1),
   },
   textInputStyle: {
-    color: '#878787',
+    color: '#0F0C1A',
     fontSize: textScale(12),
     fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
     opacity: 1,

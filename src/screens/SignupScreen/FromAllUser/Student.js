@@ -181,8 +181,8 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   textInputStyle: {
-    color: '#878787',
-    fontSize: textScale(12),
+    color: '#0F0C1A',
+    fontSize: textScale(14),
     fontFamily: fontNames.POPPINS_FONT_FAMILY_MEDIUM,
     opacity: 1,
   },

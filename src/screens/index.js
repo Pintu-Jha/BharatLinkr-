@@ -21,3 +21,4 @@ export {default as OtpVerification} from '../screens/OtpScreen/OtpVerification';
  export {default as ExamFilter} from '../Components/Modules/Exams/Filter'
  export {default as CollegeFilter} from '../Components/Modules/College/Filter'
  export {default as Notification} from '../screens/Notification/Notification'
+ export {default as HomeSearchBar} from './SearchBar/HomeSearchBar'
